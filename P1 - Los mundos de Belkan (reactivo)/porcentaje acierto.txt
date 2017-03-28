@@ -1,5 +1,4 @@
-
-            v1(prio.puertas)         v2(ant+giros12)          v3(sin nada)            v4(giros+putdown)
+                   v1                     v2                      v3                      v4
 mapa30 -->        100                     100                    100                     100
 mapa50 -->        100                     100                    100                     100
 mapa100 -->       99.62                   98.98                  99.62                   99

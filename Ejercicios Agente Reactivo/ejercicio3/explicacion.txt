@@ -1,0 +1,11 @@
+a) Debemos avanzar hasta chcocar con una pared, y una vez choca, girar 90º y empezar a contar
+  hasta que choque de nuevo.
+
+  Variables necesarias:
+    estoy_girando : bool
+    contador : bool
+    tamaño : int
+
+b) Recorrer el tablero completo todas las casillas hasta encontrar el objeto
+
+c) Calcular todas las posibles direcciones por donde puede salir y coger la mas corta.

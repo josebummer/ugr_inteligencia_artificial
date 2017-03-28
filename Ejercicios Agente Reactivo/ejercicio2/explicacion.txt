@@ -1,0 +1,20 @@
+Sensores:
+  SOSTIENE -->
+  EL_UMBRAL --> La avispa percibe que se encuentra en el umbral
+  CORRECTO --> la avispa percibe que el interior del nido esta correcto.
+  GRILLO --> La avispa percibe que el grillo esta en el umbral
+
+Acciones:
+  va ha umbral
+  va dentro
+  va fuera
+  arrastra
+  encuentra
+  deja
+
+Memoria (variables de estado):
+  Rcorrecto = false. --> Recordar si el nido esta correcto
+
+Reglas:
+  Si EN_UNBRAL && GRILLO --> va dentro.
+  ...

@@ -1,0 +1,9 @@
+/home/jose/Escritorio/IAP2/CMakeFiles/BelkanSG.dir
+/home/jose/Escritorio/IAP2/CMakeFiles/Belkan.dir
+/home/jose/Escritorio/IAP2/CMakeFiles/rebuild_cache.dir
+/home/jose/Escritorio/IAP2/CMakeFiles/motorLib.dir
+/home/jose/Escritorio/IAP2/CMakeFiles/obj3DLib.dir
+/home/jose/Escritorio/IAP2/CMakeFiles/edit_cache.dir
+/home/jose/Escritorio/IAP2/CMakeFiles/GLUILib.dir
+/home/jose/Escritorio/IAP2/CMakeFiles/modelosBelkanLib.dir
+/home/jose/Escritorio/IAP2/CMakeFiles/comportamientosLib.dir

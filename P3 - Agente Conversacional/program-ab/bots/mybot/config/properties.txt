@@ -1,0 +1,9 @@
+url:http://www.alicebot.org
+name:Sam
+email:jantonioruiz@correo.ugr.es
+gender:male
+botmaster:Jose
+organization:ugr
+age:22
+job:estudiante
+version:0.0.1

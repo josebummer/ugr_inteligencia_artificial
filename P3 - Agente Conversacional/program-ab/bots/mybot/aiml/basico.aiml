@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+
+<topic name="unknown">
+
+  <!-- regla 0 -->
+  <category>
+  <pattern>*</pattern>
+  <template>
+    No puedo contestarte a eso, intenta expresarte de otra forma. :)
+  </template>
+  </category>
+
+<!-- regla 1 -->
+<category>
+<pattern>[hola buenas] ^</pattern>
+<template>
+  <random>
+    <li>Hola, que tal?</li>
+    <li>Hola de nuevo, que tal?</li>
+    <li>Buenas!, encantado de conocerte, que tal estas?</li>
+    <li>Buenas!, encantado de conocerte, como te llamas?</li>
+  </random>
+</template>
+</category>
+
+<category>
+<pattern> (muy) [bien estupendo fantastico]</pattern>
+<that>^ QUE TAL ^</that>
+<template>Que bien!, me alegro mucho por ti</template>
+</category>
+
+<category>
+<pattern> (un) (poco) (muy) [regular mal jodido]</pattern>
+<that>^ QUE TAL</that>
+<template>Siempre se puede estar mejor :)</template>
+</category>
+
+<!-- regla 2 -->
+<category>
+<pattern>Como estas</pattern>
+<template>
+  <random>
+    <li>Estoy genial!!</li>
+    <li>Bien, vamos tirando como se puede.</li>
+    <li>Mas fresco que una rosa.</li>
+  </random>
+</template>
+</category>
+
+<!-- regla 2 -->
+<category>
+<pattern>^ que tal ^ </pattern>
+<template><srai>COMO ESTAS</srai></template>
+</category>
+
+<!-- regla 3 -->
+<category>
+<pattern> ^ me llamo *</pattern>
+<template>
+    <think><set name="nombre"><star index="2"/></set></think>
+    <get name="nombre"/> es un bonito nombre.
+</template>
+</category>
+
+<!-- regla 4 -->
+<category>
+<pattern>mi nombre es *</pattern>
+<template>
+    <think><set name="nombre"><star index="2"/></set></think>
+    <get name="nombre"/> es un bonito nombre.
+</template>
+</category>
+
+<!-- regla 5 -->
+<category>
+<pattern>Cual es tu edad ^</pattern>
+<template>Tengo <bot name="age"/> anios</template>
+</category>
+
+<!-- regla 7 -->
+<category>
+<pattern>mi color favorito es el *</pattern>
+<template>
+    <think><set var="color"><star/></set></think>
+    El <get var="color"/> es un color que no me gusta.
+</template>
+</category>
+
+<!-- regla 8 -->
+<category>
+<pattern>* mi nombre</pattern>
+<template>
+  <condition name="nombre">
+      <li value="unknown">Aun no me has dicho tu nombre</li>
+      <li>Tu nombre es <get name="nombre"/></li>
+  </condition>
+</template>
+</category>
+
+<!-- regla 9 -->
+<category>
+<pattern>^ como me llamo</pattern>
+<template><srai>CUAL ES MI NOMBRE</srai></template>
+</category>
+
+<!-- regla 10 -->
+<category>
+<pattern>es <set>color</set> un color</pattern>
+<template>Si, <star/> es un color.</template>
+</category>
+
+<!-- regla 11 -->
+<category>
+<pattern>es * un color</pattern>
+<template>No, <star/> no es un color.</template>
+</category>
+
+<!-- regla 12 -->
+<category>
+<pattern>Cual es la capital de <set>pais</set></pattern>
+<template>La capital de <star/> es <map name="capital"><star/></map>.</template>
+</category>
+
+<!-- regla 13 -->
+<category>
+<pattern>Cual es la capital de *</pattern>
+<template>No lo se</template>
+</category>
+
+<!-- regla 14 -->
+<category>
+<pattern>^ cafe ^</pattern>
+<template>Te gusta el cafe.</template>
+</category>
+
+<!-- regla 15 -->
+<category>
+<pattern>Si</pattern>
+<that>TE GUSTA EL CAFE</that>
+<template>Lo prefieres solo o con leche.</template>
+</category>
+
+
+<!-- regla 16 -->
+<category>
+<pattern>Cuenta hasta <set>number</set></pattern>
+<template>
+   <think>
+       <set var="contador">1</set>
+       <set var="salida">1</set>
+   </think>
+   <condition var="contador">
+       <li><value><star/></value><get var="salida"/></li>
+       <li>
+           <think>
+           <set var="contador">
+              <map name="successor"><get var="contador"/></map>
+           </set>
+           <set var="salida"><get var="salida"/> <get var="contador"/></set>
+           </think>
+           <loop/>
+       </li>
+   </condition>
+</template>
+</category>
+
+
+<!-- regla 17 -->
+<category>
+<pattern>la capital de * es *</pattern>
+<template>
+    <think>
+    <set var="cap"><srai>CUAL ES LA CAPITAL DE <star/></srai></set>
+    </think>
+    <condition var="cap">
+        <li value="NO LO SE">
+        <learn>
+            <category>
+            <pattern>
+                CUAL ES LA CAPITAL DE <eval><star/></eval>
+            </pattern>
+            <template>
+                La capital de <eval><star/></eval> es <eval><star index="2"/></eval>
+            </template>
+            </category>
+        </learn>
+        Recordare que la capital de <star/> es <star index="2"/>.
+        </li>
+        <li>
+        Ya lo sabia.
+        </li>
+    </condition>
+</template>
+</category>
+
+<!-- regla 18 -->
+<category>
+<pattern>^ [anios edad] tienes ^</pattern>
+<template><srai>CUAL ES TU EDAD</srai></template>
+</category>
+
+<!-- regla 19 -->
+<category>
+<pattern>Como te llamas ^</pattern>
+<template>
+  <condition name="nombre">
+      <li value="unknown">Mi nombre es <bot name="name"/>, y el tuyo?.</li>
+      <li>Me llamo <bot name="name"/>, encantado.</li>
+  </condition>
+
+</template>
+</category>
+
+<!-- regla 20 -->
+<category>
+<pattern>^ tu nombre ^</pattern>
+<template><srai>COMO TE LLAMAS</srai></template>
+</category>
+
+<category>
+<pattern>^ llamas <bot name="name"/></pattern>
+<template>Efectivamente, asi me llamo, que inteligente eres :)</template>
+</category>
+
+<category>
+<pattern> ^ gracias ^</pattern>
+<template>
+  <random>
+    <li>Denada :)</li>
+    <li>A ti</li>
+    <li>Para eso estamos.</li>
+  </random>
+</template>
+</category>
+
+<!-- regla 21 -->
+<category>
+<pattern>^ [adios bye chao] ^</pattern>
+<template>
+  <random>
+    <li>Nos vemos pronto.</li>
+    <li>Un placer.</li>
+    <li>Hasta luego.</li>
+    <li>Adios.</li>
+  </random>
+</template>
+</category>
+
+<!-- regla 22 -->
+<category>
+<pattern>^ hasta [pronto luego nunca maniana mañana] ^</pattern>
+<template>
+  <srai>ADIOS</srai>
+</template>
+</category>
+
+</topic>
+</aiml>

@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<topic name="unknown">
+  <!-- regla 1 -->
+  <category>
+  <pattern>^ [agrega+ aniad+ inserta+ crea+] ^ contacto ^</pattern>
+  <template>
+    <random>
+      <li>
+        Perfecto, dime su apellido
+        <think><set name="topic">agregar</set></think>
+      </li>
+      <li>
+        Dime su apellido
+        <think><set name="topic">agregar</set></think>
+      </li>
+      <li>
+        Si que conoces a gente :). Dime su apellido
+        <think><set name="topic">agregar</set></think>
+      </li>
+    </random>
+  </template>
+  </category>
+
+  <!-- regla 2 -->
+  <category>
+  <pattern>^ cuantos contactos * </pattern>
+  <template>
+    <think><set var="elem"><readset>contacto</readset></set></think>
+    Tienes <srai>COUNT <get var="elem"/></srai> contacto/s.
+  </template>
+  </category>
+
+  <!-- regla 7 -->
+  <category>
+  <pattern>* mis contactos ^</pattern>
+  <template>
+    <think>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="contador">1</set>
+      <set var="fin"><srai>COUNT <get var="elem"/></srai></set>
+    </think>
+    <condition var="fin">
+      <li value="0">No tienes contactos.</li>
+      <li value="1">Tus contactos son: <srai>quitarespacios <get var="elem"/></srai></li>
+      <li>
+        <think>
+          <set var="salida"><srai>TOP <get var="elem"/></srai></set>
+          <set var="elem"><srai>REMAIN <get var="elem"/></srai></set>
+          <set var="valor"><srai>TOP <get var="elem"/></srai></set>
+          <set var="elem"><srai>REMAIN <get var="elem"/></srai></set>
+        </think>
+          <condition var="contador">
+          <li><value><get var="fin"/></value>Tus contactos son: <srai>quitarespacios <get var="salida"/></srai></li>
+          <li>
+            <think>
+              <set var="contador">
+                <map name="successor"><get var="contador"/></map>
+              </set>
+              <set var="salida"><get var="salida"/>, <get var="valor"/></set>
+              <set var="valor"><srai>TOP <get var="elem"/></srai></set>
+              <set var="elem"><srai>REMAIN <get var="elem"/></srai></set>
+            </think>
+            <loop/>
+          </li>
+        </condition>
+      </li>
+    </condition>
+  </template>
+  </category>
+
+  <!-- regla 7 -->
+  <category>
+  <pattern>^ lista ^ contacto+ ^</pattern>
+  <template>
+    <srai>CUALES SON MIS CONTACTOS</srai>
+  </template>
+  </category>
+
+  <!-- regla 7 -->
+  <category>
+  <pattern>^ que contacto+ tengo ^</pattern>
+  <template>
+    <srai>CUALES SON MIS CONTACTOS</srai>
+  </template>
+  </category>
+
+  <!-- regla 8 -->
+  <category>
+  <pattern>^ [modifica+ edita+ cambia+] ^ contacto ^</pattern>
+  <template>
+    <think>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="salida"><srai>COUNT <get var="elem"/></srai></set>
+    </think>
+    <condition var="salida">
+      <li value="0">No tienes contactos en la agenda.<think><set name="topic">unknown</set></think></li>
+      <li>
+        <random>
+          <li>
+            Perfecto, dime su apellido
+            <think><set name="topic">modificar</set></think>
+          </li>
+          <li>
+            Dime su apellido
+            <think><set name="topic">modificar</set></think>
+          </li>
+        </random>
+      </li>
+    </condition>
+  </template>
+  </category>
+
+  <!-- regla 12 -->
+  <category>
+  <pattern>^ [elimina+ borra+] ^ contacto ^</pattern>
+  <template>
+    <think>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="salida"><srai>COUNT <get var="elem"/></srai></set>
+    </think>
+    <condition var="salida">
+      <li value="0">No tienes contactos en la agenda.<think><set name="topic">unknown</set></think></li>
+      <li>
+        <random>
+          <li>
+            Perfecto, dime su apellido
+            <think><set name="topic">eliminar</set></think>
+          </li>
+          <li>
+            Dime su apellido
+            <think><set name="topic">eliminar</set></think>
+          </li>
+        </random>
+      </li>
+    </condition>
+  </template>
+  </category>
+
+  <!-- regla 15 -->
+  <category>
+  <pattern>* [direccion domicilio] de *</pattern>
+  <template>
+    <think>
+      <set name="kapellido"><srai>ponerbarrabaja <star index="2"/></srai></set>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="n"><srai>COUNT <get var="elem"/></srai></set>
+      <condition var="n">
+        <li value="0"><set var="hay">0</set></li>
+        <li>
+          <set var="hay">
+            <srai>FINDITEM <get name="kapellido"/> IN <get var="elem"/></srai>
+          </set>
+        </li>
+      </condition>
+    </think>
+    <condition var="hay">
+      <li value="0">No existe <star index="2"/> en la base de datos.</li>
+      <li>La direccion de <star index="2"/> es <srai>quitarespacios <map name="domicilio"><get name="kapellido"/></map></srai></li>
+    </condition>
+  </template>
+  </category>
+
+  <!-- regla 15 -->
+  <category>
+  <pattern>^ donde vive *</pattern>
+  <template>
+    <srai>CUAL ES LA DIRECCION DE <star index="2"/></srai>
+  </template>
+  </category>
+
+  <!-- regla 16 -->
+  <category>
+  <pattern>* telefono de *</pattern>
+  <template>
+    <think>
+      <set name="kapellido"><srai>ponerbarrabaja <star index="2"/></srai></set>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="n"><srai>COUNT <get var="elem"/></srai></set>
+      <condition var="n">
+        <li value="0"><set var="hay">0</set></li>
+        <li>
+          <set var="hay">
+            <srai>FINDITEM <get name="kapellido"/> IN <get var="elem"/></srai>
+          </set>
+        </li>
+      </condition>
+    </think>
+    <condition var="hay">
+      <li value="0">No existe <star index="2"/> en la base de datos.</li>
+      <li>El telefono de <star index="2"/> es <srai>quitarespacios <map name="telefono"><get name="kapellido"/></map></srai></li>
+    </condition>
+  </template>
+  </category>
+
+  <!-- regla 17 -->
+  <category>
+  <pattern>* nombre [tiene de] *</pattern>
+  <template>
+    <think>
+      <set name="kapellido"><srai>ponerbarrabaja <star index="2"/></srai></set>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="n"><srai>COUNT <get var="elem"/></srai></set>
+      <condition var="n">
+        <li value="0"><set var="hay">0</set></li>
+        <li>
+          <set var="hay">
+            <srai>FINDITEM <get name="kapellido"/> IN <get var="elem"/></srai>
+          </set>
+        </li>
+      </condition>
+    </think>
+    <condition var="hay">
+      <li value="0">No existe <star index="2"/> en la base de datos.</li>
+      <li>El nombre de <star index="2"/> es <srai>quitarespacios <map name="nombre"><get name="kapellido"/></map></srai></li>
+    </condition>
+  </template>
+  </category>
+
+  <!-- regla 18 -->
+  <category>
+  <pattern>* se llama *</pattern>
+  <template>
+    <srai>CUAL ES EL NOMBRE DE <star index="2"/></srai>
+  </template>
+  </category>
+
+</topic>
+
+<!-- regla 3 -->
+<topic name="agregar">
+  <category>
+  <pattern>*</pattern>
+  <template>
+    <think>
+      <set name="kapellido"><srai>ponerbarrabaja <star/></srai></set>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="n"><srai>COUNT <get var="elem"/></srai></set>
+    </think>
+      <condition var="n">
+        <li value="0">
+          <think><set var="hay">0</set></think>
+        </li>
+        <li>
+          <think>
+            <set var="hay">
+              <srai>FINDITEM <get name="kapellido"/> IN <get var="elem"/></srai>
+            </set>
+          </think>
+        </li>
+      </condition>
+      <condition var="hay">
+        <li value="0">
+          <addtoset>
+            <name>contacto</name>
+            <key><get name="kapellido"/></key>
+          </addtoset>
+          Dime su <set name="topic">nombre</set>
+        </li>
+        <li>Este contacto ya esta guardado.<think><set name="topic">unknown</set></think></li>
+      </condition>
+  </template>
+  </category>
+</topic>
+
+<!-- regla 4 -->
+<topic name="nombre">
+  <category>
+  <pattern>*</pattern>
+  <template>
+    <addtomap>
+      <name>nombre</name>
+      <key><get name="kapellido"/></key>
+      <value><srai>ponerbarrabaja <star/></srai></value>
+    </addtomap>
+        Dime su <set name="topic">domicilio</set>
+  </template>
+  </category>
+</topic>
+
+<!-- regla 5 -->
+<topic name="domicilio">
+  <category>
+  <pattern>*</pattern>
+  <template>
+    <addtomap>
+      <name>domicilio</name>
+      <key><get name="kapellido"/></key>
+      <value><srai>ponerbarrabaja <star/></srai></value>
+    </addtomap>
+        Dime su <set name="topic">telefono</set>
+  </template>
+  </category>
+</topic>
+
+<!-- regla 6 -->
+<topic name="telefono">
+  <category>
+  <pattern>*</pattern>
+  <template>
+    <addtomap>
+      <name>telefono</name>
+      <key><get name="kapellido"/></key>
+      <value><star/></value>
+    </addtomap>
+    <random>
+      <li>perfecto, contacto guardado.</li>
+      <li>Contacto guardado.</li>
+      <li>Un contacto mas a la coleccion</li>
+    </random>
+    <think><set name="topic">unknown</set></think>
+  </template>
+  </category>
+</topic>
+
+<!-- regla 9 -->
+<topic name="modificar">
+  <category>
+  <pattern>*</pattern>
+  <template>
+    <think>
+      <set name="kapellido"><srai>ponerbarrabaja <star/></srai></set>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="n"><srai>COUNT <get var="elem"/></srai></set>
+      <condition var="n">
+        <li value="0"><set var="hay">0</set></li>
+        <li>
+          <set var="hay">
+            <srai>FINDITEM <get name="kapellido"/> IN <get var="elem"/></srai>
+          </set>
+        </li>
+      </condition>
+    </think>
+    <condition var="hay">
+      <li value="0">El contacto que buscas no existe en tu agenda.<think><set name="topic">unknown</set></think></li>
+      <li>¿Quiere modificar la direccion o el telefono?<think><set name="topic">dot</set></think></li>
+    </condition>
+  </template>
+  </category>
+</topic>
+
+<!-- regla 10 -->
+<topic name="dot">
+  <category>
+  <pattern>^ direccion ^</pattern>
+  <template>
+    ¿Cual es la nueva direccion?
+    <think><set name="topic">moddir</set></think>
+  </template>
+  </category>
+
+  <category>
+  <pattern>^ telefono ^</pattern>
+  <template>
+    ¿Cual es el nuevo numero de telefono?
+    <think><set name="topic">modtel</set></think>
+  </template>
+  </category>
+</topic>
+
+<!-- regla 11 -->
+<topic name="moddir">
+  <category>
+  <pattern>*</pattern>
+  <template>
+    <modifymap>
+      <name>domicilio</name>
+      <key><get name="kapellido"/></key>
+      <value><srai>ponerbarrabaja <star/></srai></value>
+    </modifymap>
+    <think><set name="topic">unknown</set></think>
+    Contacto modificado
+  </template>
+  </category>
+</topic>
+
+<!-- regla 11 -->
+<topic name="modtel">
+  <category>
+  <pattern>*</pattern>
+  <template>
+    <modifymap>
+      <name>telefono</name>
+      <key><get name="kapellido"/></key>
+      <value><srai>ponerbarrabaja <star/></srai></value>
+    </modifymap>
+    <think><set name="topic">unknown</set></think>
+    Contacto modificado
+  </template>
+  </category>
+</topic>
+
+<!-- regla 13 -->
+<topic name="eliminar">
+  <category>
+  <pattern>*</pattern>
+  <template>
+    <think>
+      <set name="kapellido"><srai>ponerbarrabaja <star/></srai></set>
+      <set var="elem"><readset>contacto</readset></set>
+      <set var="n"><srai>COUNT <get var="elem"/></srai></set>
+      <condition var="n">
+        <li value="0"><set var="hay">0</set></li>
+        <li>
+          <set var="hay">
+            <srai>FINDITEM <get name="kapellido"/> IN <get var="elem"/></srai>
+          </set>
+        </li>
+      </condition>
+    </think>
+    <condition var="hay">
+      <li value="0">El contacto que buscas no existe en tu agenda.<think><set name="topic">unknown</set></think></li>
+      <li>Claro, ¿esta seguro de querer eliminarlo?<think><set name="topic">son</set></think></li>
+    </condition>
+  </template>
+  </category>
+</topic>
+
+<!-- regla 14 -->
+<topic name="son">
+  <category>
+  <pattern>[si claro seguro correcto] ^</pattern>
+  <template>
+    <removefrommap>
+      <name>telefono</name>
+      <key><get name="kapellido"/></key>
+    </removefrommap>
+    <removefrommap>
+      <name>domicilio</name>
+      <key><get name="kapellido"/></key>
+    </removefrommap>
+    <removefrommap>
+      <name>nombre</name>
+      <key><get name="kapellido"/></key>
+    </removefrommap>
+    <removefromset>
+      <name>contacto</name>
+      <key><get name="kapellido"/></key>
+    </removefromset>
+    <think><set name="topic">unknown</set></think>
+    Contacto eliminado
+  </template>
+  </category>
+
+  <category>
+  <pattern>[no nunca jamas] ^</pattern>
+  <template>
+    <random>
+      <li>No se preocupe su contacto esta a salvo.</li>
+      <li>Operacion cancelada</li>
+      <li>Contacto no eliminado</li>
+    </random>
+    <think><set name="topic">unknown</set></think>
+  </template>
+  </category>
+
+  <!-- regla 0 -->
+  <category>
+  <pattern>*</pattern>
+  <template>
+    No puedo contestarte a eso, intenta expresarte de otra forma. :)
+  </template>
+  </category>
+</topic>
+
+</aiml>

@@ -1,0 +1,89 @@
+Albania:Tirana
+Angola:Luanda
+Argentina:Buenos Aires
+Belgica:Bruselas
+Bielorrusia:Minsk
+Bolivia:Sucre
+Brasil:Brasilia
+Bulgaria:Sofia
+Burundi:Buyumbura
+Catar:Doha
+Chile:Santiago
+China:Pekin
+Chipre:Nicosia
+Columbia:Bogota
+Congo:Brazzaville
+Croacia:Zagreb
+Cuba:La Habana
+Dinamarca:Copenhague
+Ecuador:Quito
+Egipto:El Cairo
+Eslovaquia:Bratislava
+Eslovenia:Liubliana
+Espania:Madrid
+Estados Unidos:Washington
+Estonia:Tallin
+Filipinas:Manila
+Finlandia:Helsinki
+Francia:Paris
+Ghana:Accra
+Grecia:Atenas
+Guatemala:Guatemala
+Guinea:Conakri
+Haiti:Puerto Principe
+Honduras:Tegucigalpa
+Hungria:Budapest
+India:Nueva Delhi
+Indonesia:Yakarta
+Irak:Bagdad
+Iran:Teheran
+Irlanda:Dublin
+Islandia:Reikiavik
+Israel:Jerusalen
+Italia:Roma
+Jamaica:Kingston
+Japon:Tokio
+Kenia:Nairobi
+Letonia:Riga
+Libano:Beirut
+Lituania:Vilna
+Macedonia:Skopie
+Malasia:Kuala Lumpur
+Maldivas:Male
+Malta:La Valeta
+Marruecos:Rabat
+Mexico:Mexico
+Moldavia:Chisinau
+Monaco:Monaco
+Mongolia:Ulan Bator
+Mozambique:Maputo
+Nepal:Katmandu
+Nigeria:Abuya
+Noruega:Oslo
+Paises Bajos:Amsterdam
+Palestina:Jerusalen Este
+Panama:Panama
+Paraguay:Asuncion
+Peru:Lima
+Polonia:Varsovia
+Portugal:Lisboa
+Rumania:Bucarest
+Rusia:Moscu
+Senegal:Dakar
+Servia:Belgrado
+Singapur:Singapur
+Siria:Damasco
+Somalia:Mogadiscio
+Sudafrica:Pretoria
+Suecia:Estocolmo
+Suiza:Berna
+Tailandia:Bangkok
+Taiwan:Taipei
+Tunez:Tunez
+Turquia:Ankara
+Ucrania:Kiev
+Uruguay:Motevideo
+Vaticano:Vaticano
+Venezuela:Caracas
+Vietnam:Hanoi
+Zambia:Lusaka

@@ -708,6 +708,12 @@
 	  </think>
 	</template>
 	</category>
+	
+<!-- Practica 3: Agentes conversacionales -->
+
+<!-- Realizada por: Jose Antonio Ruiz Millan -->
+
+<!-- Inteligencia Artificial 2016/2017 -->
 
 	<category>
 		<pattern>VALIDARFECHA *</pattern>

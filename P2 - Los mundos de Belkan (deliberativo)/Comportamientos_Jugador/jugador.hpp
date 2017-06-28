@@ -1,3 +1,11 @@
+/*
+Practica 2: Agentes deliberativos.
+
+Realizada por: Jose Antonio Ruiz Millan
+
+Inteligencia Artificial 2016/2017
+*/
+
 #ifndef COMPORTAMIENTOJUGADOR_H
 #define COMPORTAMIENTOJUGADOR_H
 

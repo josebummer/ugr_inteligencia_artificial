@@ -25,4 +25,4 @@ mapa100n2 -->     9.5                 99.99                89
 
 </code></pre>
 
-Los resultados pueden variar minimamente ya que la busqueda deliberativa es aleatoria
+Los resultados pueden variar minimamente ya que la exploracion deliberativa es aleatoria

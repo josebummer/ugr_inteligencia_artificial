@@ -1,3 +1,11 @@
+/*
+Practica 1: Agentes reactivos.
+
+Realizada por: Jose Antonio Ruiz Millan
+
+Inteligencia Artificial 2016/2017
+*/
+
 #include "../Comportamientos_Jugador/jugador.hpp"
 #include <iostream>
 using namespace std;

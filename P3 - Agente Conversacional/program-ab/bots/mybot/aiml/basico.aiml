@@ -1,11 +1,11 @@
-<!-- Practica 1: Agentes reactivos -->
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+
+<!-- Practica 3: Agentes conversacionales -->
 
 <!-- Realizada por: Jose Antonio Ruiz Millan -->
 
 <!-- Inteligencia Artificial 2016/2017 -->
-
-<?xml version="1.0" encoding="UTF-8"?>
-<aiml version="2.0">
 
 
 <topic name="unknown">
